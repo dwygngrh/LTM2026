@@ -1,0 +1,56 @@
+[Startup]
+branding = Lagrangian Trajectory Model, RCO-BRIN, Indonesia-2026
+
+[Simulation]
+# Choose model mode: 'marine_debris' (surface only) or 'microplastic' (3D transport)
+mode = marine_debris
+dt = 3600 
+start_simulation = 2024-01-01 00:00:00
+end_simulation = 2024-01-10 23:59:59
+# Output frequency in seconds (e.g., 3600 for hourly)
+write_frequency = 3600
+
+[Diffusion]
+# Horizontal diffusion coefficient (m^2/s) for random walk[cite: 5]
+Kh = 5.0
+# Vertical diffusion coefficient (m^2/s) - relevant for microplastics[cite: 5]
+Kz = 0.001
+
+[Files]
+cmems_dir = /home/dnugroho/LTM_2026/CMEMS/ 
+era5_dir = /home/dnugroho/LTM_2026/ERA5/
+output_dir = /home/dnugroho/LTM_2026/output 
+
+[MarineDebris]
+# Only used if mode = marine_debris[cite: 5, 6]
+# Options: macro_plastic, human, wood, styrofoam
+type = macro_plastic
+# Specific leeway coefficients (windage)[cite: 5, 6]
+leeway_macro_plastic = 0.03
+leeway_human = 0.04
+leeway_wood = 0.02
+leeway_styrofoam = 0.05
+
+[Microplastic]
+# Only used if mode = microplastic[cite: 5, 6]
+# Polymer options: PE (910 kg/m3) or HDPE (950 kg/m3)
+polymer_type = HDPE
+diameter_mm = 0.5
+shape = sphere
+# 3D Physics parameters[cite: 5, 6]
+biofouling = True
+biofilm_thickness_mm = 0.01
+biofilm_density = 1350.0
+
+[Source1]
+name = Jakarta_Bay
+# Particles released between these times (Inclusive start, Exclusive end suggested)[cite: 5, 6]
+start_date_release = 2024-01-01 01:00:00
+end_date_release = 2024-01-01 12:00:00
+lon = 106.85
+lat = -6.10
+depth = 0.0
+diameter = 10
+type = active
+# Release units: particles/hour
+release_rate = 10
